@@ -3,7 +3,8 @@
 <head>
   <title>Secret Status Buttons</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <!-- ✅ NEW EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -49,18 +50,20 @@
   <button class="button p2-not" onclick="sendEmail('Person 2 is Not Available')">Person 2: Not Available</button>
 
   <script>
-    // ✅ Initialize EmailJS
-    (function() {
-      emailjs.init("FTdsyjJFlDlFxDHrs"); // Your new public key
-    })();
+    // ✅ Load EmailJS after SDK is ready
+    window.onload = function () {
+      emailjs.init("FTdsyjJFlDlFxDHrs"); // ✅ Your PUBLIC KEY
 
-    // ✅ Send Email Function
-    function sendEmail(message) {
-      emailjs.send("service_jz3j389", "template_u1r1nse", {
-        message: message // must match the template variable name
-      })
-      .then(() => alert("✅ Notification Sent: " + message))
-      .catch(error => alert("❌ Failed to send: " + error.text));
+      window.sendEmail = function(message) {
+        emailjs.send("service_jz3j389", "template_u1r1nse", {
+          message: message // ✅ this must match the variable name in your EmailJS template
+        })
+        .then(function(response) {
+          alert("✅ Notification Sent: " + message);
+        }, function(error) {
+          alert("❌ Failed to send: " + error.text);
+        });
+      }
     }
   </script>
 </body>
