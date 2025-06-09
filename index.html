@@ -50,10 +50,10 @@
   <script type="module">
     import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
 
-    emailjs.init("3s6s-R6KhOhVVvqGJ");
+    emailjs.init("FTdsyjJFlDlFxDHrs"); // ✅ Updated public key
 
     window.sendEmail = function(message) {
-      emailjs.send("service_94sxhv7", "template_ozdxa0r", { message: message })
+      emailjs.send("service_jz3j389", "template_u1r1nse", { message: message })
         .then(() => alert("✅ Notification Sent: " + message))
         .catch(err => alert("❌ Failed to send: " + err.text));
     }
