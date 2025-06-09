@@ -37,26 +37,21 @@
     .button:hover {
       opacity: 0.85;
     }
-  </style>
-</head>
-<body>
-  <h2>Secret Notification Panel</h2>
+<script type="module">
+  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
 
-  <button class="button p1-available" onclick="sendEmail('Person 1 is Available')">Person 1: Available</button>
-  <button class="button p1-not" onclick="sendEmail('Person 1 is Not Available')">Person 1: Not Available</button>
-  <button class="button p2-available" onclick="sendEmail('Person 2 is Available')">Person 2: Available</button>
-  <button class="button p2-not" onclick="sendEmail('Person 2 is Not Available')">Person 2: Not Available</button>
+  // ✅ Initialize with your public key
+  emailjs.init("FTdsyjJFlDlFxDHrs");
 
-  <script type="module">
-    import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+  // ✅ This function sends the message
+  window.sendEmail = function(message) {
+    emailjs.send("service_jz3j389", "template_u1r1nse", {
+      message: message   // ✅ Make sure this matches your template variable
+    })
+    .then(() => alert("✅ Notification Sent: " + message))
+    .catch(err => alert("❌ Failed to send: " + err.text));
+  }
+</script>
 
-    emailjs.init("FTdsyjJFlDlFxDHrs"); // ✅ Updated public key
-
-    window.sendEmail = function(message) {
-      emailjs.send("service_jz3j389", "template_u1r1nse", { message: message })
-        .then(() => alert("✅ Notification Sent: " + message))
-        .catch(err => alert("❌ Failed to send: " + err.text));
-    }
-  </script>
 </body>
 </html>
