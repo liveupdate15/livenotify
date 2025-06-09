@@ -3,6 +3,7 @@
 <head>
   <title>Secret Status Buttons</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -37,21 +38,30 @@
     .button:hover {
       opacity: 0.85;
     }
-<script type="module">
-  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+  </style>
+</head>
+<body>
+  <h2>Secret Notification Panel</h2>
 
-  // ✅ Initialize with your public key
-  emailjs.init("FTdsyjJFlDlFxDHrs");
+  <button class="button p1-available" onclick="sendEmail('Person 1 is Available')">Person 1: Available</button>
+  <button class="button p1-not" onclick="sendEmail('Person 1 is Not Available')">Person 1: Not Available</button>
+  <button class="button p2-available" onclick="sendEmail('Person 2 is Available')">Person 2: Available</button>
+  <button class="button p2-not" onclick="sendEmail('Person 2 is Not Available')">Person 2: Not Available</button>
 
-  // ✅ This function sends the message
-  window.sendEmail = function(message) {
-    emailjs.send("service_jz3j389", "template_u1r1nse", {
-      message: message   // ✅ Make sure this matches your template variable
-    })
-    .then(() => alert("✅ Notification Sent: " + message))
-    .catch(err => alert("❌ Failed to send: " + err.text));
-  }
-</script>
+  <script>
+    // ✅ Initialize EmailJS
+    (function() {
+      emailjs.init("FTdsyjJFlDlFxDHrs"); // Your new public key
+    })();
 
+    // ✅ Send Email Function
+    function sendEmail(message) {
+      emailjs.send("service_jz3j389", "template_u1r1nse", {
+        message: message // must match the template variable name
+      })
+      .then(() => alert("✅ Notification Sent: " + message))
+      .catch(error => alert("❌ Failed to send: " + error.text));
+    }
+  </script>
 </body>
 </html>
